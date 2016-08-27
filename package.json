@@ -1,0 +1,45 @@
+{
+  "name": "neo-instagram",
+  "version": "0.0.1",
+  "description": "Instagram for Node.js and Browser",
+  "license": "MIT",
+  "repository": "jlobos/neo-instagram",
+  "author": "Jesús Lobos <jlobitu@gmail.com>",
+  "main": "lib/index.js",
+  "browser": "lib/index.browser.js",
+  "scripts": {
+    "build": "npm run clean && babel src -d lib && webpack",
+    "clean": "rimraf lib/*",
+    "prepublish": "npm run build",
+    "test": "npm run build && standard && ava"
+  },
+  "engines": {
+    "node": ">=4"
+  },
+  "files": [
+    "lib/index.browser.js",
+    "lib/index.js"
+  ],
+  "keywords": [
+    "api",
+    "instagram",
+    "node",
+    "browser"
+  ],
+  "dependencies": {
+    "deep-extend": "^0.4.1",
+    "fetch-jsonp": "^1.0.1",
+    "node-fetch": "^1.6.0",
+    "qs": "^6.2.1",
+    "query-string": "^4.2.3"
+  },
+  "devDependencies": {
+    "ava": "^0.16.0",
+    "babel-cli": "^6.14.0",
+    "babel-loader": "^6.2.5",
+    "babel-preset-es2015": "^6.14.0",
+    "rimraf": "^2.5.4",
+    "standard": "^8.0.0",
+    "webpack": "^1.13.2"
+  }
+}
