@@ -44,7 +44,7 @@ class NeoInstagram {
     fetch(url, payload)
     .then(r => r.json())
     .then(r => {
-      if (r.status !== 200) {
+      if (r.meta.code >= 400) {
         callback(r)
       } else {
         callback(undefined, r)

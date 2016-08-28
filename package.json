@@ -1,6 +1,6 @@
 {
   "name": "neo-instagram",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Instagram for Node.js and Browser",
   "license": "MIT",
   "repository": "jlobos/neo-instagram",
