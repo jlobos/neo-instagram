@@ -28,7 +28,7 @@
   ],
   "dependencies": {
     "deep-extend": "^0.4.1",
-    "fetch-jsonp": "^1.0.1",
+    "fetch-jsonp": "^1.0.3",
     "node-fetch": "^1.6.0",
     "qs": "^6.2.1",
     "query-string": "^4.2.3"
