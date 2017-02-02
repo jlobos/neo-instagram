@@ -34,7 +34,7 @@
     "query-string": "^4.2.3"
   },
   "devDependencies": {
-    "ava": "^0.16.0",
+    "ava": "^0.18.0",
     "babel-cli": "^6.14.0",
     "babel-loader": "^6.2.5",
     "babel-preset-es2015": "^6.14.0",
