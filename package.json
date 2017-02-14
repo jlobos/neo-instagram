@@ -31,7 +31,7 @@
     "fetch-jsonp": "^1.0.1",
     "node-fetch": "^1.6.0",
     "qs": "^6.2.1",
-    "query-string": "^4.2.3"
+    "query-string": "^4.3.2"
   },
   "devDependencies": {
     "ava": "^0.16.0",
