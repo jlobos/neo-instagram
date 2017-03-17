@@ -18,8 +18,7 @@
   "keywords": [
     "api",
     "instagram",
-    "node",
-    "browser"
+    "node"
   ],
   "dependencies": {
     "node-fetch": "^1.6.0",
