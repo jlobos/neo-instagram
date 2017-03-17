@@ -1,36 +1,35 @@
-
 import test from 'ava'
-import NeoInstagram from '../lib/index'
+import Instagram from './index'
 
-let defaults = {}
+const insta = new Instagram({
+  access_token: '',
+  client_id: 'fb8e666c68d64b2ebbbaae439d7211db',
+  client_secret: ''
+})
 
-test.before(t => {
-  defaults = {
-    access_token: null,
-    rest_base: 'https://api.instagram.com/v1/'
+test('getAuthorizationUrl', t => {
+  const url = insta.getAuthorizationUrl({
+    redirect_uri: 'http://your-redirect-uri.com/',
+    response_type: 'code',
+    scope: 'basic+likes',
+    state: ''
+  })
+
+  t.is(url, 'https://api.instagram.com/oauth/authorize/?client_id=fb8e666c68d64b2ebbbaae439d7211db&redirect_uri=http://your-redirect-uri.com/&response_type=code&scope=basic+likes&state=')
+})
+
+test('getToken', async t => {
+  try {
+    await insta.getToken({ code: '' })
+  } catch (err) {
+    t.is(err.code, 400)
   }
 })
 
-test('create new instance', t => {
-  const client = new NeoInstagram()
-  t.true(client instanceof NeoInstagram)
-})
-
-test('has default options', t => {
-  const client = new NeoInstagram()
-  t.is(Object.keys(defaults).length, Object.keys(client.options).length)
-  t.deepEqual(Object.keys(defaults), Object.keys(client.options))
-})
-
-test.cb('GET users/self', t => {
-  const client = new NeoInstagram({
-    access_token: ''
-  })
-
-  client.get('users/self', (e, r) => {
-    t.falsy(r)
-    t.is(typeof e, 'object')
-    t.is(e.meta.code, 400)
-    t.end()
-  })
+test('GET', async t => {
+  try {
+    await insta.get('users/self', { access_token: '' })
+  } catch (err) {
+    t.is(err.meta.code, 400)
+  }
 })
