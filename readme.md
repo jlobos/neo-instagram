@@ -39,7 +39,7 @@ Supported options:
 
 ## Authentication
 
-Direct your user to our authorization URL
+Direct your user to Instagram authorization URL
 
 ```js
 const url = client.getAuthorizationUrl({
