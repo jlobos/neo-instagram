@@ -54,10 +54,10 @@ Request the `access_token`
 
 ```js
 // Callback
-client.getToken({ code: '' }, callback)
+client.getToken({ code: '', redirect_uri: '' }, callback)
 
 // Promise
-client.getToken({ code: '' }).then().catch()
+client.getToken({ code: '', redirect_uri: '' }).then().catch()
 ```
 
 ## REST API
