@@ -27,6 +27,6 @@
   },
   "devDependencies": {
     "ava": "^0.18.2",
-    "standard": "^9.0.1"
+    "standard": "^9.0.2"
   }
 }
