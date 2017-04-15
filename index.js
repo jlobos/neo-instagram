@@ -2,7 +2,6 @@
 
 const fetch = require('node-fetch')
 const qs = require('qs')
-const query = require('query-string')
 
 module.exports = class {
   constructor (options = {}) {
@@ -31,35 +30,28 @@ module.exports = class {
     return `${oauth_url}/authorize/?client_id=${client_id}&redirect_uri=${uri}&response_type=${response_type}&scope=${scope}&state=${state}`
   }
 
-  getToken ({ code, redirect_uri } = {}, callback) {
+  getToken ({ code, redirect_uri, client_id, client_secret } = {}, callback) {
     return new Promise((resolve, reject) => {
-      const { client_id, client_secret, oauth_url } = this.options
-      const uri = redirect_uri || this.options.redirect_uri
-
       const form = qs.stringify({
-        'client_id': client_id,
-        'client_secret': client_secret,
+        'client_id': client_id || this.options.client_id,
+        'client_secret': client_secret || this.options.client_secret,
         'code': code,
         'grant_type': 'authorization_code',
-        'redirect_uri': uri
+        'redirect_uri': redirect_uri || this.options.redirect_uri
       })
 
-      fetch(`${oauth_url}/access_token`, {
+      fetch(`${this.options.oauth_url}/access_token`, {
         method: 'POST',
         body: form,
-        headers: {
-          'Accept': 'application/json, text/plain, */*',
-          'Content-Type': 'application/x-www-form-urlencoded'
-        }
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
       })
       .then(res => res.json())
       .then(res => {
-        // error
         if (res.code >= 400) {
           return (callback) ? callback(res) : reject(res)
         }
 
-        (callback) ? callback(undefined, res) : resolve(res)
+        (callback) ? callback(null, res) : resolve(res)
       })
     })
   }
@@ -74,17 +66,14 @@ module.exports = class {
     const access_token = params.access_token || this.options.access_token
 
     if (method === 'GET' || method === 'DELETE') {
-      params = query.stringify(Object.assign({ access_token }, params))
+      params = qs.stringify(Object.assign({ access_token }, params))
       url = `${url}?${params}`
     }
 
     if (method === 'POST') {
       payload = Object.assign({
         body: qs.stringify(Object.assign({ access_token }, params)),
-        headers: {
-          'Accept': 'application/json, text/plain, */*',
-          'Content-Type': 'application/x-www-form-urlencoded'
-        }
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
       }, payload)
     }
 
@@ -92,12 +81,11 @@ module.exports = class {
       fetch(url, payload)
       .then(res => res.json())
       .then(res => {
-        // error
         if (res.meta.code >= 400) {
           return (callback) ? callback(res) : reject(res)
         }
 
-        (callback) ? callback(undefined, res) : resolve(res)
+        (callback) ? callback(null, res) : resolve(res)
       })
     })
   }
