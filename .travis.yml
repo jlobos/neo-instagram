@@ -1,7 +1,15 @@
 language: node_js
 node_js:
   - stable
-install:
-  - npm install
+notifications:
+  email: false
 script:
-  - npm test
+  - yarn test
+cache: yarn
+deploy:
+  provider: npm
+  email: jlobitu@gmail.com
+  api_key:
+    secure: I/+c+8jvKS6SLMzH4TUzuHoaOFA/IOHGnBZV/87+nQnEOsxgSdXZB2UqWFVccTLaMNGuLbZPYtMLO6kIqTxTJI13IWrkbWsuI103SujVBQNhT97ueaBsnK1OBgXJrBixV6H+UIbH3SAQrRBkY6c3BRB9eJ4zx50AZZ3ztjgV301DFWJhGBkISXy7FROI3mVHReTdzW7vLT3NuuQkuZyleiqSBIJXOlsSikFJaenU/9vwNbdIFEFS5LYIJP2M18S3zTSqIM6VdiNEd/CT8ACVCANXbJPkvNm2E2ar29tR6GlK56cWweq5Yc28OmuKL6ofBYxKdbAIhCzlqhYwImiMlPCjDeaLTdfmf2ItuhUZIYH0y4NZbm5Nfb2nWIj0KlaT/PldGlEW6cOX1tF0qn+eaKuvNO9/mFEZIwrGVCRIC/rklTm1aJzVBIo/BBGFZP/E0E+hQm7B3z8RzuV4UYrGzDBh6EF2CBuLrSpKWjuyKF7DxpuZquecGOInnjEsN6A4Mqy16um+616SWYjgMwgDgAUBtJr2uYUpcuhuwuJql4Hx2d9tMVKxSAQF777JE9186tgG9R4dvhmrIlFfhuIU09+GIOoZPz/gjDOivvqIMXG8D6fgdVD/xOE2OtS2CwgELWvEx2iMMFIw9f04czS4N/o2s3X92YsxFZchoYguTS4=
+  on:
+    tags: true
